@@ -46,7 +46,8 @@ function CopyFrag() {}
 
 async function fetchData(query="USA") {
   
-const _apiUrl = `https://mmtbackend-production.up.railway.app/airports`;
+// const _apiUrl = `https://mmtbackend-production.up.railway.app/airports`;
+const _apiUrl = `https://taher2552.github.io/flight_data.json/Flight_json`;
 
 const options = {
   method: 'GET',
@@ -66,7 +67,12 @@ const options = {
 }
 
 
+
+
 function CreateSuggestionItem(value){
+
+  console.log("helllllllllo")
+  console.log(value)
 
   const FragmentElements = document.createDocumentFragment();
 
@@ -192,12 +198,13 @@ FlightFrom.addEventListener("click", async (e) => {
 
    FlightSearchBox.classList.remove("hide_element");
   let data = await fetchData();
-
+console.log("kkk")
+console.log(data)
    
 
   //Pick five data and render (for loop or slice)
 
-  data.data.airports.forEach((airport) => {
+  data.data.forEach((airport) => {
     CreateSuggestionItem(airport)
   })
 
@@ -219,7 +226,7 @@ FlightTo.addEventListener("click", async (e) => {
 
   //Pick five data and render (for loop or slice)
 
-  data.data.airports.forEach((airport) => {
+  data.data.forEach((airport) => {
     CreateSuggestionItem1(airport)
   })
 
@@ -243,7 +250,7 @@ async function Search_Handle(){
 
   let data = await fetchData(Input_Box.value);
 
-  data.data.airports.forEach((value) => {
+  data.airports.forEach((value) => {
     if (value.city_name.includes(Input_Box.value)) {
     CreateSuggestionItem(value)
     }
@@ -260,7 +267,7 @@ async function Search_Handle1(){
 
 
 
-  data.data.airports.forEach((value) => {
+  data.data.forEach((value) => {
     
  
     if (value.city_name.includes(Input_Box1.value)) {
@@ -277,16 +284,18 @@ let testingVariable;
 
 
 ShowMat.addEventListener('click',(e)=>{
-  console.log(e)
+
   var path = e.path || (e.composedPath && e.composedPath());
-  for(let i=0; i<path.length; i++)
-    
+  for(let i=0; i<path.length; i++){
+
     if(path[i].classList.contains('airline_one')){
+
       document.getElementById('City-Name').innerText = path[i].querySelector('h3').innerText;
       document.getElementById('Airport-Code').innerText = path[i].querySelector('p').innerText;
       document.getElementById('Airport-Name').innerText = path[i].querySelector('h5').innerText;
       check1=document.getElementById('City-Name').innerText
       FlightSearchBox.classList.add("hide_element");
+
 
       let departureCity = path[i].querySelector('h3').innerText;
       let departureCityAirport = path[i].querySelector('p').innerText;
@@ -294,6 +303,7 @@ ShowMat.addEventListener('click',(e)=>{
       localStorage.setItem("cityDeparture", departureCity)
       localStorage.setItem("airportDeparture", departureCityAirport)
       localStorage.setItem("airportDepartureCode", departureCityCode)
+    }
     
     }
 
