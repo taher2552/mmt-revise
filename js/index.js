@@ -4,6 +4,9 @@ const travellerNumber = document.querySelector('.travel-number');
 
 const searchButton = document.querySelector('.search_fornt_page');
 
+let f= new Date();
+console.log(f)
+
 
 let theEnd = 0,
   navBar = document.querySelector("#Header_Id");
@@ -47,7 +50,7 @@ function CopyFrag() {}
 async function fetchData(query="USA") {
   
 // const _apiUrl = `https://mmtbackend-production.up.railway.app/airports`;
-const _apiUrl = `https://taher2552.github.io/flight_data.json/Flight_json`;
+const _apiUrl = `https://raw.githubusercontent.com/ashhadulislam/JSON-Airports-India/master/airports.json`;
 
 const options = {
   method: 'GET',
@@ -62,17 +65,27 @@ const options = {
   const response = await fetch(_apiUrl, options);
   // Storing data in form of JSON
   const data = await response.json();
+
+  console.log("hello")
+  console.log(data.airports)
   return data;
 
 }
+
+fetchData();
 
 
 
 
 function CreateSuggestionItem(value){
 
-  console.log("helllllllllo")
-  console.log(value)
+
+
+
+
+
+
+
 
   const FragmentElements = document.createDocumentFragment();
 
@@ -129,6 +142,7 @@ ShowMat.append(FragmentElements);
 }
 
 function CreateSuggestionItem1(value){
+  
 
   const FragmentElements = document.createDocumentFragment();
 
@@ -198,13 +212,14 @@ FlightFrom.addEventListener("click", async (e) => {
 
    FlightSearchBox.classList.remove("hide_element");
   let data = await fetchData();
-console.log("kkk")
-console.log(data)
+
+
    
+
 
   //Pick five data and render (for loop or slice)
 
-  data.data.forEach((airport) => {
+  data.airports.forEach((airport) => {
     CreateSuggestionItem(airport)
   })
 
@@ -220,13 +235,13 @@ FlightTo.addEventListener("click", async (e) => {
   //Console coming two times**************************************
 
   FlightSearchBox1.classList.remove("hide_element");
-  let data = await fetchData();
 
-   
+  let data = await fetchData();
+  
 
   //Pick five data and render (for loop or slice)
 
-  data.data.forEach((airport) => {
+  data.airports.forEach((airport) => {
     CreateSuggestionItem1(airport)
   })
 
@@ -250,8 +265,10 @@ async function Search_Handle(){
 
   let data = await fetchData(Input_Box.value);
 
+ 
+
   data.airports.forEach((value) => {
-    if (value.city_name.includes(Input_Box.value)) {
+    if (value.city_name.toLowerCase().includes(Input_Box.value.toLowerCase())) {
     CreateSuggestionItem(value)
     }
   })
@@ -267,10 +284,18 @@ async function Search_Handle1(){
 
 
 
-  data.data.forEach((value) => {
+  // data.data.forEach((value) => {
     
  
-    if (value.city_name.includes(Input_Box1.value)) {
+  //   if (value.city_name.includes(Input_Box1.value)) {
+  //   CreateSuggestionItem1(value)
+  //   }
+  // })
+
+
+
+  data.airports.forEach((value) => {
+    if (value.city_name.toLowerCase().includes(Input_Box1.value.toLowerCase())) {
     CreateSuggestionItem1(value)
     }
   })

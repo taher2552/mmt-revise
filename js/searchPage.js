@@ -22,6 +22,8 @@ const passengerClassDisplay = document.querySelector('.passenger_class');
 const searchButton = document.querySelector('.search_btn');
 
 
+
+
 let dayName = localStorage.getItem("name_of_day");
 let dayNumber = localStorage.getItem("day");
 let departMonth = localStorage.getItem("month");
@@ -38,10 +40,10 @@ let arrivalCode = localStorage.getItem("codeLand") ?? "CCU"
 departCityDisplay.innerText = departureCity ?? "Delhi";
 arriveCityDisplay.innerText = arrivalCity ?? "Kolkata";
 
-
+console.log(departureCity)
 
 // const api_url =  `https://mmtbackend-production.up.railway.app/flights?depart_city_name=${departureCity}&depart_IATA_code=${departCode}&depart_airport_name=${departAirport}&dept_day_name=${dayName}&dept_day=${dayNumber}&dept_month${departMonth}&dept_year=${departYear}&arrive_city_name=${arrivalCity}&arrive_IATA_code=${arrivalCode}&arrive_airport_name=${arrivalAirport}`;
-const api_url =  `https://taher2552.github.io/flight_data.json/Flight_json?depart_city_name=${departureCity}&depart_IATA_code=${departCode}&depart_airport_name=${departAirport}&dept_day_name=${dayName}&dept_day=${dayNumber}&dept_month${departMonth}&dept_year=${departYear}&arrive_city_name=${arrivalCity}&arrive_IATA_code=${arrivalCode}&arrive_airport_name=${arrivalAirport}`;
+const api_url =  `https://taher2552.github.io/flight_revise/flight_new`;
 
 
 async function fetchData(url) {
@@ -130,16 +132,20 @@ let departCityValue;
 
  searchFunction();
 
+
+
 const dayToShow = document.querySelector('.day_display');
 const monthToShow = document.querySelector('.month_display');
 const yearToShow = document.querySelector('.year_display');
-const dayNameToShow = document.querySelector('.day_name_display');
+const dayNameToShow = document.querySelector('.day_name_display') ;
 
+let currDay= new Date();
+let dateArr= currDay.toString().split(' ');
 
-dayToShow.innerText = dayNumber;
-monthToShow.innerText = departMonth;
-yearToShow.innerText = departYear;
-dayNameToShow.innerText = dayName;
+dayToShow.innerText = dayNumber ?? dateArr[2];
+monthToShow.innerText = departMonth ?? dateArr[1];
+yearToShow.innerText = departYear ?? dateArr[3];
+dayNameToShow.innerText = dayName?? dateArr[0];
 
 
 
@@ -159,6 +165,8 @@ dayNameToShow.innerText = dayName;
 
 
 function displaySearchResult(val){
+
+   console.log(val)
 
    let dynamicImageName ={
       
@@ -193,11 +201,11 @@ function displaySearchResult(val){
    </div>
    <div class="flight_time">
       <p class="departure_time">${val.dept_time}</p>
-      <p class="departure_airport hidden">${val.depart_airport_name}</p>
-      <p class="arrival_airport hidden">${val.arrive_airport_name}</p>
-      <p class="arrival_airport hidden">${val.depart_IATA_code}</p>
-      <p class="arrival_airport hidden">${val.arrive_IATA_code}</p>
-      <p class="departure_city_name">${val.depart_city_name} </p>
+      <p class="departure_airport hidden">${departAirport}</p>
+      <p class="arrival_airport hidden">${arrivalAirport}</p>
+      <p class="arrival_airport hidden">${departCode}</p>
+      <p class="arrival_airport hidden">${arrivalCode}</p>
+      <p class="departure_city_name">${departureCity} </p>
    </div>
    <div class="one_stop">
       <p class="total_duration">${val.total_duration}</p>
@@ -213,7 +221,7 @@ function displaySearchResult(val){
             <p>Day</p>
          </div>
       </div>
-      <p class="destination arrival_city_name">${val.arrive_city_name}</p>
+      <p class="destination arrival_city_name">${arrivalCity}</p>
    </div>
    <div class="price_details">
       <p class="ticket_price">₹ ${val.price}</p>
@@ -246,7 +254,7 @@ async function searchFunction(){
 
    console.log(data)
 
-data.data.flights.map((val)=>{
+data.data.map((val)=>{
 
    
  
@@ -336,7 +344,7 @@ async function searchFunctionFlight(flightName){
 
    let data = await fetchData(api_url);
 
-data.data.flights.map((val)=>{
+data.data.map((val)=>{
 
    if(flightName.length>0){
    if(val.flight==flightName){

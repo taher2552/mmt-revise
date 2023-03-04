@@ -1,5 +1,8 @@
 const date = new Date();
 
+let currDateArr = date.toString().split(' ');
+
+
 const weekday = document.querySelector('.weekdays');
 let monthNameInCalendar;
 
@@ -10,6 +13,10 @@ const monthName = document.querySelector('.month_name');
 const yearNumber = document.querySelector('.year_number');
 const dayToDisplay = document.querySelector(".day_to_display");
 const calenderHeading = document.querySelector(".calender_heading");
+
+monthName.innerText=currDateArr[1];
+dayToDisplay.innerText=currDateArr[0];
+monthDay.innerText=currDateArr[2];
 
 
 Box_flightto.addEventListener('click', hideelements)
@@ -215,7 +222,7 @@ let j=1;
 
       localStorage.setItem("name_of_day", nameOfDay);
       localStorage.setItem("day", monthDayNum);
-      localStorage.setItem("month", monthNameCal);
+      localStorage.setItem("month", monthNameCal );
       localStorage.setItem("year", currentYear);
       Main_box.style.display="none";
       }
