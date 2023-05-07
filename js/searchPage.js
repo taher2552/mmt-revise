@@ -10,6 +10,11 @@ const tripArrive = document.querySelector('.trip_arrive');
 const tripDepart = document.querySelector('.trip_depart');
 const arriveCityDisplay = document.querySelector('.arrive_city_display');
 const departCityDisplay = document.querySelector('.depart_city_display');
+const arriveCityDisplay1 = document.querySelector('.arrive_city_display1');
+const departCityDisplay1 = document.querySelector('.depart_city_display1');
+const arriveCityDisplay2 = document.querySelector('.arrive_city_display2');
+const departCityDisplay2 = document.querySelector('.depart_city_display2');
+const departCityDisplay3 = document.querySelector('.depart_city_display3');
 const departCity = document.getElementById("depart_city");
 const arriveCity = document.getElementById("arrive_city");
 const tripTypeWay = document.querySelector('.trip_type_way'); 
@@ -39,6 +44,14 @@ let arrivalCode = localStorage.getItem("codeLand") ?? "CCU"
 
 departCityDisplay.innerText = departureCity ?? "Delhi";
 arriveCityDisplay.innerText = arrivalCity ?? "Kolkata";
+
+departCityDisplay1.innerText = departureCity ?? "Delhi";
+arriveCityDisplay1.innerText = arrivalCity ?? "Kolkata";
+
+departCityDisplay2.innerText = departureCity ?? "Delhi";
+arriveCityDisplay2.innerText = arrivalCity ?? "Kolkata";
+
+departCityDisplay3.innerText = departureCity ?? "Delhi";
 
 console.log(departureCity)
 
