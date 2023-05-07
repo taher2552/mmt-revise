@@ -492,6 +492,8 @@ console.log(code)
 coderesult.confirm(code).then(function(){
 
    document.getElementsByClassName('n-conf')[0].style.display = 'none';
+   document.getElementById('verificationcode').value="";
+
 
    userArray.map((val) => {
     let user_name_display =val.name;
